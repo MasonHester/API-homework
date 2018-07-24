@@ -1,0 +1,49 @@
+/* Color Themes */
+
+/* Prussian Blue = 0B3C5D */
+/* Sky Blue = 328CC1 */
+/* Gold Leaf = D9B310 */
+/* Ivory Black = 1D2731 */
+
+/* Navy Blue = 0F1626 */
+/* Leather = AB987A */
+/* Coral = FF533D */
+/* Eggshell = F5F5F5*/
+
+/* Blue Topaz = 67AECA */
+/* Amethyst = 675682 */
+/* Jewel = 5F0F4E */
+/* Rose = E52A6F */
+
+/* Stormy = 494E6B */
+/* Cloud = 98878F */
+/* Sunset = 985E6D */
+/* Evening = 192231 */
+
+/* Dark Grey? = #5F6366 */
+/* Deep Blue? = #4D6D9A */
+/* Pastel Teal? = #86B3D1 */
+/* Pastel Sky Blue? = #99CED3 */
+/* Pastel Light Pink? = #EDB5BF */
+
+/* Clean = E8E8E8 */
+
+/* Cool Grey = CDCDCD */
+
+/* =============================== */
+
+body {
+    background: #4D6D9A;
+}
+
+.firstRow {
+    margin: 20px 0px 0px 0px;
+}
+
+.mainContentCol {
+    background: #99CED3;
+}
+
+.buttonsCol {
+    background: #5F6366;
+}
