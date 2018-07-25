@@ -45,17 +45,26 @@ $(document).ready(function() {
         });
     }
 
-    // function imageCheck() {
-    //     currentImage = $(this)(".animalImage");
-    //     if(currentImage.attr("data-state" === "static")) {
-    //         currentImage.attr("data-state", "moving").attr("src", result.
+    function imageCheck() {
+        console.log("image clicked");
+        var $this = $(this)
+        var imageState = $(this).attr("data-state");
+        var currentStatic = $this.attr("data-static-url");
+        var currentMoving = $this.attr("data-moving-url");
+        if(imageState === "static") {
+            console.log("entered if");
+            $this.attr("data-state", "moving").attr("src", currentMoving);
+        }
 
-    //     }
-    // }
+        else {
+            console.log("entered else");
+            $this.attr("data-state", "static").attr("src", currentStatic);
+        }
+    }
 
     $buttonsCol.on("click", ".animalButton", displayGIFs);
 
-    // $GIFsCol.on("clicK", ".animalImage", imageCheck);
+    $GIFsCol.on("click", ".animalImage", imageCheck);
 
     displayButtons();
 });
