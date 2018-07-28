@@ -1,38 +1,57 @@
-$(document).ready(function() {
-
-    animalsArray = ["Turtle", "Dog", "PufferFish", "Fox"];
+$(document).ready(function () {
 
     var $buttonsCol = $(".buttonsCol");
 
     var $GIFsCol = $(".GIFsCol");
 
+    var $addAnimal = $(".addAnimal");
+
     var APIKey = "Pj7SF1CwRUBJYlaIY08NhriMy6ogXXDB";
+
+    initialArray = ["Turtle", "Dog", "PufferFish", "Fox"];
 
     var result = {};
 
-    function displayButtons() {        
-        for(i = 0; i < animalsArray.length; i++) {
+    
+    // function reset() {
+    //     localStorage.removeItem("initialArray");
+    // }
+
+    // reset();
+
+    function displayButtons() {
+        console.log("displayButtons called");
+        $buttonsCol.empty();
+        console.log("buttons Col emptied");
+        animalsArray = JSON.parse(localStorage.getItem("initialArray"));
+        console.log("animalsArray = initialArray value from local")
+        console.log("animalsArray: " + animalsArray);
+
+        for (i = 0; i < animalsArray.length; i++) {
             var button = $("<button>");
             button.addClass("animalButton").attr("data-animal", animalsArray[i]).text(animalsArray[i]);
             $buttonsCol.append(button);
         }
+        console.log("button creation loop finished");
     }
 
     function displayGIFs() {
+        console.log("displayGIFs Called");
         $GIFsCol.empty();
+        console.log("GIFs col emptied");
         var animal = $(this).attr("data-animal");
 
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIKey +"&q=" + animal + "&limit=10&rating=pg-13";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIKey + "&q=" + animal + "&limit=10&rating=pg-13";
 
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response);
             result = response.data;
-            
 
-            for(i = 0; i < result.length; i++) {
+
+            for (i = 0; i < result.length; i++) {
                 var $animalImage = $("<img>");
                 var $animalDiv = $("<div>");
                 var $animalPar = $("<par>");
@@ -51,7 +70,7 @@ $(document).ready(function() {
         var imageState = $(this).attr("data-state");
         var currentStatic = $this.attr("data-static-url");
         var currentMoving = $this.attr("data-moving-url");
-        if(imageState === "static") {
+        if (imageState === "static") {
             console.log("entered if");
             $this.attr("data-state", "moving").attr("src", currentMoving);
         }
@@ -62,9 +81,35 @@ $(document).ready(function() {
         }
     }
 
+    function addButton() {
+        event.preventDefault();
+        var $animalInput = $("#animalForm").val().trim();
+        console.log("animal input" + $animalInput);
+        var tempVar = JSON.parse(localStorage.getItem("initialArray"));
+        console.log("tempVar: " + tempVar);
+        tempVar.push($animalInput);
+        localStorage.setItem("initialArray", JSON.stringify(tempVar));
+        displayButtons();
+    }
+
+    function userCheck() {
+        var initArrayChecker = localStorage.getItem("initialArray")
+        console.log("initArray: " + initArrayChecker);
+        if (initArrayChecker) {
+            displayButtons();
+        }
+
+        else {
+            localStorage.setItem("initialArray", JSON.stringify(initialArray));
+            displayButtons();
+        }
+    }
+
     $buttonsCol.on("click", ".animalButton", displayGIFs);
 
     $GIFsCol.on("click", ".animalImage", imageCheck);
 
-    displayButtons();
+    $addAnimal.on("click", addButton);
+
+    userCheck();
 });
