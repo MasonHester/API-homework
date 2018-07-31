@@ -90,9 +90,12 @@ body {
     border-top: 2px solid #2D4159;
     border-right: 2px solid #2D4159;
     text-align: center;
+    padding: 20px 0px 0px 0px;
 }
 
-/* 
-.darkBlueBorder {
-    border: 1px solid #2D4159;
-} */
+@media all and (max-width: 767px)
+ {
+   .GIFsCol {
+     border-right: none;
+   }
+ }

@@ -160,9 +160,20 @@ $(document).ready(function () {
         function addButton() {
             // Prevents the entire form being submitted
             event.preventDefault();
+            
+            // Creates aniaml input
+            let $animalInput = "";
 
-            // Sets animalInput to the value of the textbox
-            let $animalInput = $("#animalInput").val().trim();
+                // If xs or s screen
+                if($("#animalInput").val().trim()) {
+                    $animalInput = $("#animalInput").val().trim();
+                }
+                
+                // If md or larger screen
+                else {
+                    $animalInput = $("#animalInput2").val().trim();
+                }
+            
 
             // Sets tempAnimalArray to the animalArray stored in local
             let tempAnimalArray = JSON.parse(localStorage.getItem("animalArray"));
@@ -175,6 +186,7 @@ $(document).ready(function () {
 
             // Clears the input on submission
             $(".animalForm")[0].reset();
+            $(".animalForm2")[0].reset();
 
             // Calls displayButtons
             displayButtons();
@@ -300,9 +312,11 @@ $(document).ready(function () {
 
         // When add animal is clicked, calls addButton
         $(".addAnimal").on("click", addButton);
+        $(".addAnimal2").on("click", addButton);
 
         // Resets the animal buttons
         $(".resetAnimals").on("click", resetAnimalArray);
+        $(".resetAnimals2").on("click", resetAnimalArray);
 
         // When remove button is clicked, calls remove button
         $buttonsCol.on("click", ".removeButton", removeButton);
@@ -326,4 +340,7 @@ $(document).ready(function () {
         // form uses ID would having two forms with the same work? if not would having
         // a second form with a second id that calls the same function be the most
         //efficient fix?
+
+    //Question
+        //for the HTML when not md col-xs-n and col-s-n doesnt work.
 });
